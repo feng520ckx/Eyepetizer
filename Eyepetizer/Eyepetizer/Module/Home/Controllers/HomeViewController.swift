@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import FDFullscreenPopGesture
+import SGPagingView
+
 
 class HomeViewController: UIViewController {
 
@@ -14,8 +17,10 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.white;
+        self.fd_prefersNavigationBarHidden = true;
+        setupUI();
         
-        self.view.backgroundColor = UIColor.blue;
         
     }
 
@@ -24,15 +29,20 @@ class HomeViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func setupUI(){
+        let config = SGPageTitleViewConfigure();
+        let menu = SGPageTitleView.init(frame: CGRect.init(x: 40, y: 20, width: self.view.frame.size.width-80, height: 44), delegate: self as SGPageTitleViewDelegate, titleNames: ["测试1","测试2","测试3","测试4","测试5","测试6"], configure: config)!;
+        menu.isShowBottomSeparator=false;
+        
+        self.view.addSubview(menu);
+        
     }
-    */
 
+}
+
+extension HomeViewController:SGPageTitleViewDelegate{
+    func pageTitleView(_ pageTitleView: SGPageTitleView!, selectedIndex: Int) {
+        print("selectId=\(selectedIndex)");
+    }
 }
