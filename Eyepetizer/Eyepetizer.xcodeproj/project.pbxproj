@@ -24,6 +24,8 @@
 		F333B89C205D1C2F0069BA34 /* FZLTZCHJW--GB1-0.TTF in Resources */ = {isa = PBXBuildFile; fileRef = F333B898205D1C2F0069BA34 /* FZLTZCHJW--GB1-0.TTF */; };
 		F333B89D205D1C2F0069BA34 /* Lobster 1.4.otf in Resources */ = {isa = PBXBuildFile; fileRef = F333B899205D1C2F0069BA34 /* Lobster 1.4.otf */; };
 		F333B8B1206129D10069BA34 /* HomeTopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F333B8B0206129D10069BA34 /* HomeTopView.swift */; };
+		F3414527206CCA6E00D0EBDF /* HomeSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3414526206CCA6E00D0EBDF /* HomeSubViewController.swift */; };
+		F34DD8F32071DDE100638340 /* HomeItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34DD8F22071DDE100638340 /* HomeItemModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +49,8 @@
 		F333B898205D1C2F0069BA34 /* FZLTZCHJW--GB1-0.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FZLTZCHJW--GB1-0.TTF"; sourceTree = "<group>"; };
 		F333B899205D1C2F0069BA34 /* Lobster 1.4.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lobster 1.4.otf"; sourceTree = "<group>"; };
 		F333B8B0206129D10069BA34 /* HomeTopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTopView.swift; sourceTree = "<group>"; };
+		F3414526206CCA6E00D0EBDF /* HomeSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSubViewController.swift; sourceTree = "<group>"; };
+		F34DD8F22071DDE100638340 /* HomeItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +195,7 @@
 		F333B875205BC9170069BA34 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F34DD8F22071DDE100638340 /* HomeItemModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				F333B887205BCAAF0069BA34 /* HomeViewController.swift */,
+				F3414526206CCA6E00D0EBDF /* HomeSubViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -453,6 +459,7 @@
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/HandyJSON/HandyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/IBAnimatable/IBAnimatable.framework",
+				"${BUILT_PRODUCTS_DIR}/JKCategories/JKCategories.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
@@ -469,6 +476,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HandyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IBAnimatable.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JKCategories.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
@@ -494,6 +502,8 @@
 				F333B890205D11940069BA34 /* NotificViewController.swift in Sources */,
 				F333B8B1206129D10069BA34 /* HomeTopView.swift in Sources */,
 				F333B88C205D01D70069BA34 /* RootNagigationController.swift in Sources */,
+				F34DD8F32071DDE100638340 /* HomeItemModel.swift in Sources */,
+				F3414527206CCA6E00D0EBDF /* HomeSubViewController.swift in Sources */,
 				F333B886205BC9790069BA34 /* RootTabBarViewController.swift in Sources */,
 				F333B867205BC7E50069BA34 /* AppDelegate.swift in Sources */,
 				F333B888205BCAAF0069BA34 /* HomeViewController.swift in Sources */,
