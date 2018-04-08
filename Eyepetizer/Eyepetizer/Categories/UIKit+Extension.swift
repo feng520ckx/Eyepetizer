@@ -35,9 +35,9 @@ extension UIFont{
         case .DINCondensedBold:
             font = UIFont.init(name: "DIN Condensed", size: size);
         case .FZXIHEIRegular:
-            font = UIFont.init(name: "方正兰亭细黑简体", size: size);
+            font = UIFont.init(name: "FZLTXIHJW--GB1-0", size: size);
         case .FZZHONGCURegular:
-            font = UIFont.init(name: "方正兰亭中粗黑简体", size: size);
+            font = UIFont.init(name: "FZLTZCHJW--GB1-0", size: size);
         case .LOBStTERRegular:
             font = UIFont.init(name: "Lobster 1.4", size: size);
         }

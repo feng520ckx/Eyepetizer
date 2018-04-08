@@ -8,13 +8,52 @@
 
 import UIKit
 import HandyJSON
+//public protocol Encodable {
+//    func encode(to encoder: Encoder) throws
+//}
+//public protocol Decodable {
+//    init(from decoder: Decoder) throws
+//}
+//public typealias Codable = Decodable & Encodable
 
-struct HomeItemModel: HandyJSON {
-    var data: Data?
+
+struct HomeItemModel: Codable {
     var id: Int = 0
-    var type: Itemtype = .textCard
+    var type: String?
+    var tag: String?
     var adIndex: Int = 0
+    
+    init(from decoder: Decoder) throws{
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        
+        print("values=\(values)")
+        
+    }
+
+    
 }
+
+struct SquareRootData: HandyJSON{//squareCardCollection data
+    var dataType: String?
+    var header: Header?
+    
+}
+
+struct SquareItemList: HandyJSON {
+//    var data: Data?
+    var id: Int = 0
+    var type: String?
+    var adIndex: Int = 0
+    var header: Header?
+    var dataType: String?
+    
+}
+
+struct SquareItemListData: HandyJSON {
+    var type: String?
+//    var
+}
+
 
 struct Data: HandyJSON {
     var collected: Bool = false
@@ -92,6 +131,21 @@ struct Follow: HandyJSON {
     var itemType: String?
     var itemId: Int = 0
     var followed: Bool = false
+}
+
+struct Header: HandyJSON {
+    var subTitle: String?
+    var textAlign: String?
+    var id: Int = 0
+    var subTitleFont: String?
+    var title: String?
+    var font: String?
+    var actionUrl: String?
+    var icon: String?
+    var iconType: String?
+    var time : Int64 = 0
+    var showHateVideo: Bool = false
+    
 }
 
 struct Tags: HandyJSON {
