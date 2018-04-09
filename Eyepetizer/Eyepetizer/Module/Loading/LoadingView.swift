@@ -85,7 +85,6 @@ class LoadingView: UIView {
     }
     
    public func startAnimation(){
-        
         self.bigEyeImageView.transform = .identity;
         self.bigEyeImageView2.transform = .identity;
         self.bigEyeImageView3.transform = .identity;
@@ -102,6 +101,9 @@ class LoadingView: UIView {
     }
     
     public func stopAnimation(){
+        self.bigEyeImageView.transform = .identity;
+        self.bigEyeImageView2.transform = .identity;
+        self.bigEyeImageView3.transform = .identity;
         
         self.timer?.invalidate();
         self.timer = nil;
