@@ -21,8 +21,15 @@ class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDat
         table.dataSource=self;
         table.rowHeight = UITableViewAutomaticDimension;
         table.separatorStyle = .none;
+        table.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0);
         table.register(HomeSquartCell.self, forCellReuseIdentifier: "HomeSquartCell");
         return table;
+    }()
+    
+    lazy var refreshImageView:UIImageView = {
+        let imageview = UIImageView.init();
+        
+        return imageview;
     }()
 
     override func viewDidLoad() {
@@ -68,10 +75,18 @@ class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeSquartCell");
-        
-        return cell!;
-
+        let data = self.itemArray[indexPath.row];
+        if data["type"].stringValue == "squareCardCollection" {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HomeSquartCell");
+            (cell as! HomeSquartCell).config(data: data);
+            
+            return cell!;
+        }
+        else {
+            let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil);
+            cell.textLabel?.text = "other cell";
+            return cell;
+        }
     }
     
     

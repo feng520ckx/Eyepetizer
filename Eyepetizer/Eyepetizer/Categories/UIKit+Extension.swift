@@ -18,7 +18,6 @@ extension UINavigationItem{
         titleLabel.textAlignment = .center;
         self.titleView=titleLabel
     }
-    
 }
 
 enum FontCustomType {

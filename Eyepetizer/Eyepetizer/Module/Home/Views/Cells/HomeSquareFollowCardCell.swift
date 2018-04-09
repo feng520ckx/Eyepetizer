@@ -8,8 +8,9 @@
 
 import UIKit
 import Kingfisher
+import SwiftyJSON
 
-class HomeSquareCollectionCell: UICollectionViewCell {
+class HomeSquareFollowCardCell: UICollectionViewCell,ConfigCellDataProtocol {
     
     fileprivate lazy var bgImageView:UIImageView = {
         let imageView = UIImageView.init();
@@ -27,13 +28,16 @@ class HomeSquareCollectionCell: UICollectionViewCell {
     
     fileprivate lazy var timeLabel:UILabel = {
         let label = UILabel.init();
-        label.font = UIFont.fontType(type: .DINCondensedBold, size: 14)
+        label.font = UIFont.fontType(type: .DINCondensedBold, size: 14);
         label.textColor = UIColor.white
-        label.backgroundColor = UIColor.black
-        label.layer.cornerRadius = 2
-        label.text="02:20  ";
-        label.textAlignment = .center;
         return label;
+    }()
+    
+    fileprivate lazy var timeContentView: UIView = {
+        let view = UIView.init();
+        view.layer.cornerRadius = 2;
+        view.backgroundColor = UIColor.black;
+        return view;
     }()
     
     fileprivate lazy var headImageView:UIImageView = {
@@ -53,7 +57,7 @@ class HomeSquareCollectionCell: UICollectionViewCell {
     fileprivate lazy var shareButton: UIButton = {
         let button = UIButton.init();
         button.setImage(UIImage.init(named: "action_share_grey_24x24_"), for: .normal);
-        button.addTarget(self, action: #selector(HomeSquareCollectionCell.shareButtonClick), for: .touchUpInside);
+        button.addTarget(self, action: #selector(HomeSquareFollowCardCell.shareButtonClick), for: .touchUpInside);
         return button;
     }()
     
@@ -74,7 +78,6 @@ class HomeSquareCollectionCell: UICollectionViewCell {
     }()
     
     
-    
     override init(frame: CGRect) {
         super.init(frame: frame);
         setupSubviews();
@@ -85,12 +88,28 @@ class HomeSquareCollectionCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func config(data:JSON){
+        let content = data["data"]["content"]["data"];
+        self.bgImageView.kf.setImage(with: URL.init(string: content["cover"]["feed"].stringValue));
+        self.videoTitleLabel.text = content["title"].stringValue;
+        self.videoDescLabel.text = content["slogan"].stringValue;
+        
+        self.headImageView.kf.setImage(with: URL.init(string: content["author"]["icon"].stringValue));
+        let min = content["duration"].intValue/60;
+        let sec = content["duration"].intValue%60;
+        let minFormat = String(format:"%02d",min)
+        let secFormat = String(format:"%02d",sec)
+        self.timeLabel.text = "\(minFormat):\(secFormat)"
+        
+    }
+    
     func setupSubviews(){
         self.contentView.addSubview(self.bgImageView);
         self.contentView.addSubview(self.headImageView);
         self.contentView.addSubview(self.headIconImageView);
-        self.contentView.addSubview(self.iconImageView);
-        self.bgImageView.addSubview(self.timeLabel);
+        self.bgImageView.addSubview(self.iconImageView);
+        self.bgImageView.addSubview(self.timeContentView);
+        self.timeContentView.addSubview(self.timeLabel);
         self.contentView.addSubview(self.videoTitleLabel);
         self.contentView.addSubview(self.videoDescLabel);
         self.contentView.addSubview(self.shareButton);
@@ -98,13 +117,29 @@ class HomeSquareCollectionCell: UICollectionViewCell {
     
     func setupAutoLayout(){
         self.bgImageView.snp.makeConstraints { (make) in
-            make.left.right.top.equalTo(self.contentView);
-            make.bottom.equalTo(self.contentView.snp.bottom).offset(-80)
+            make.left.right.equalTo(self.contentView);
+            make.top.equalTo(self.contentView).offset(10);
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-70)
+        }
+        
+        self.timeContentView.snp.makeConstraints { (make) in
+            make.bottom.right.equalTo(self.bgImageView).offset(-10);
+            make.height.equalTo(16);
         }
         
         self.timeLabel.snp.makeConstraints { (make) in
-            make.bottom.right.equalTo(self.bgImageView).offset(-10);
-            make.height.equalTo(16);
+            
+            make.left.equalTo(self.timeContentView).offset(3);
+            make.right.equalTo(self.timeContentView).offset(-3);
+            make.centerX.equalTo(self.timeContentView);
+            make.centerY.equalTo(self.timeContentView).offset(1);
+
+        }
+        
+        self.iconImageView.snp.makeConstraints { (make) in
+            make.left.equalTo(self.bgImageView).offset(10);
+            make.top.equalTo(self.bgImageView).offset(10);
+            make.width.height.equalTo(48);
         }
         
         self.headImageView.snp.makeConstraints { (make) in

@@ -27,7 +27,8 @@
 		F3414527206CCA6E00D0EBDF /* HomeSubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3414526206CCA6E00D0EBDF /* HomeSubViewController.swift */; };
 		F34DD8F32071DDE100638340 /* HomeItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F34DD8F22071DDE100638340 /* HomeItemModel.swift */; };
 		F3BCDF0B2079AA93002B64CD /* HomeSquartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF0A2079AA93002B64CD /* HomeSquartCell.swift */; };
-		F3BCDF0D2079C766002B64CD /* HomeSquareCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF0C2079C766002B64CD /* HomeSquareCollectionCell.swift */; };
+		F3BCDF0D2079C766002B64CD /* HomeSquareFollowCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF0C2079C766002B64CD /* HomeSquareFollowCardCell.swift */; };
+		F3BCDF0F207B085A002B64CD /* HomeSquareBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF0E207B085A002B64CD /* HomeSquareBannerCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +55,8 @@
 		F3414526206CCA6E00D0EBDF /* HomeSubViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSubViewController.swift; sourceTree = "<group>"; };
 		F34DD8F22071DDE100638340 /* HomeItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeItemModel.swift; sourceTree = "<group>"; };
 		F3BCDF0A2079AA93002B64CD /* HomeSquartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSquartCell.swift; sourceTree = "<group>"; };
-		F3BCDF0C2079C766002B64CD /* HomeSquareCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSquareCollectionCell.swift; sourceTree = "<group>"; };
+		F3BCDF0C2079C766002B64CD /* HomeSquareFollowCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSquareFollowCardCell.swift; sourceTree = "<group>"; };
+		F3BCDF0E207B085A002B64CD /* HomeSquareBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSquareBannerCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -342,7 +344,8 @@
 			isa = PBXGroup;
 			children = (
 				F3BCDF0A2079AA93002B64CD /* HomeSquartCell.swift */,
-				F3BCDF0C2079C766002B64CD /* HomeSquareCollectionCell.swift */,
+				F3BCDF0C2079C766002B64CD /* HomeSquareFollowCardCell.swift */,
+				F3BCDF0E207B085A002B64CD /* HomeSquareBannerCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -514,9 +517,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F333B890205D11940069BA34 /* NotificViewController.swift in Sources */,
+				F3BCDF0F207B085A002B64CD /* HomeSquareBannerCell.swift in Sources */,
 				F333B8B1206129D10069BA34 /* HomeTopView.swift in Sources */,
 				F333B88C205D01D70069BA34 /* RootNagigationController.swift in Sources */,
-				F3BCDF0D2079C766002B64CD /* HomeSquareCollectionCell.swift in Sources */,
+				F3BCDF0D2079C766002B64CD /* HomeSquareFollowCardCell.swift in Sources */,
 				F3BCDF0B2079AA93002B64CD /* HomeSquartCell.swift in Sources */,
 				F34DD8F32071DDE100638340 /* HomeItemModel.swift in Sources */,
 				F3414527206CCA6E00D0EBDF /* HomeSubViewController.swift in Sources */,

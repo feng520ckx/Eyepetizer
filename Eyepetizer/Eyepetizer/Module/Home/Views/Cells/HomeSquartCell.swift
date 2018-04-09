@@ -8,8 +8,13 @@
 
 import UIKit
 import SnapKit
+import SwiftyJSON
 
-class HomeSquartCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource {
+protocol ConfigCellDataProtocol {
+    func config(data:JSON);
+}
+
+class HomeSquartCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource,ConfigCellDataProtocol,UICollectionViewDelegateFlowLayout {
 
     fileprivate lazy var weekdayLabel:UILabel = {
         let weekLabel = UILabel.init();
@@ -30,26 +35,34 @@ class HomeSquartCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewD
     fileprivate lazy var collectionView : UICollectionView = {
         
         let flowLayout = UICollectionViewFlowLayout.init();
-        flowLayout.itemSize = CGSize.init(width: UIScreen.main.bounds.size.width-40, height: 260);
+//        flowLayout.itemSize = CGSize.init(width: UIScreen.main.bounds.size.width-40, height: 250);
         flowLayout.minimumLineSpacing = 10;
-        flowLayout.headerReferenceSize = CGSize.init(width: 15, height: 260);
-        flowLayout.footerReferenceSize = CGSize.init(width: 15, height: 260);
+        flowLayout.headerReferenceSize = CGSize.init(width: 15, height: 250);
+        flowLayout.footerReferenceSize = CGSize.init(width: 15, height: 250);
         flowLayout.scrollDirection = .horizontal;
 
         let collectionView =  UICollectionView.init(frame: .zero, collectionViewLayout: flowLayout);
         collectionView.backgroundColor = UIColor.white;
+        collectionView.delegate=self;
         collectionView.dataSource = self;
         collectionView.showsHorizontalScrollIndicator = false;
-        collectionView.delegate=self;
-        collectionView.register(HomeSquareCollectionCell.self, forCellWithReuseIdentifier: "HomeSquareCollectionCell")
+        
+        collectionView.register(HomeSquareFollowCardCell.self, forCellWithReuseIdentifier: "HomeSquareFollowCardCell")
+        collectionView.register(HomeSquareBannerCell.self, forCellWithReuseIdentifier: "HomeSquareBannerCell")
         
         return collectionView;
+    }()
+    
+    fileprivate lazy var lineView: UIView = {
+        let line = UIView.init();
+        line.backgroundColor =  UIColor.init(hex: "#DEDEDE");
+        return line;
     }()
     
     fileprivate var currentIndex:Int! = 0
     fileprivate var dragStartX:CGFloat! = 0.0
     fileprivate var dragEndX:CGFloat! = 0.0
-    
+    fileprivate var itemList:Array<JSON>?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -66,17 +79,34 @@ class HomeSquartCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewD
         super.init(style: style, reuseIdentifier: reuseIdentifier);
         setupViews();
         setupAutolayout();
+        self.selectionStyle = .none;
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func config(data:JSON){
+        
+        if data["data"]["header"]["font"].stringValue == "bold"{
+            self.cellTitleLabel.font = UIFont.fontType(type: .FZZHONGCURegular, size: 20);
+            self.collectionView.snp.updateConstraints({ (make) in
+                make.height.equalTo(170);
+            })
+        }
+        
+        self.weekdayLabel.text = data["data"]["header"]["subTitle"].stringValue;
+        self.cellTitleLabel.text = data["data"]["header"]["title"].stringValue;
+        self.itemList = data["data"]["itemList"].arrayValue;
+        self.collectionView.reloadData();
+        
+    }
     
     func setupViews(){
         self.contentView.addSubview(self.weekdayLabel);
         self.contentView.addSubview(self.cellTitleLabel);
         self.contentView.addSubview(self.collectionView);
+        self.contentView.addSubview(self.lineView);
     }
     
     func setupAutolayout(){
@@ -93,21 +123,45 @@ class HomeSquartCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewD
         self.collectionView.snp.makeConstraints { (make) in
             make.left.right.equalTo(self.contentView);
             make.top.equalTo(self.cellTitleLabel.snp.bottom).offset(5);
-            make.height.equalTo(200);
-            make.bottom.equalTo(self.contentView);
+            make.height.equalTo(250);
+            make.bottom.equalTo(self.contentView).offset(-5);
+        }
+        
+        self.lineView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.collectionView.snp.bottom);
+            make.left.equalTo(self.contentView).offset(15);
+            make.right.equalTo(self.contentView).offset(-15);
+            make.height.equalTo(0.5);
         }
     }
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3;
+        return (self.itemList?.count)!;
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "HomeSquareCollectionCell", for: indexPath);
+        
+        let data = self.itemList![indexPath.row];
+        var reuseIdentifier = "HomeSquareFollowCardCell";
+        if data["type"].stringValue == "banner2" {
+            reuseIdentifier = "HomeSquareBannerCell"
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath);
+        (cell as! ConfigCellDataProtocol).config(data: data);
         return cell;
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
+        let data = self.itemList![indexPath.row];
+        var height:CGFloat = 250.0;
+        if data["type"].stringValue == "banner2"{
+            height = 170.0;
+        }
+        
+        return  CGSize.init(width: UIScreen.main.bounds.size.width - 40, height: height)
+    }
+
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         self.dragStartX = scrollView.contentOffset.x;
     }
@@ -137,3 +191,6 @@ class HomeSquartCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewD
    
     
 }
+
+
+
