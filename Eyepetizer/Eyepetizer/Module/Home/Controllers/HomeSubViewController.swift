@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-//import HandyJSON
 import SnapKit
 
 class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
@@ -26,10 +25,10 @@ class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDat
         return table;
     }()
     
-    lazy var refreshImageView:UIImageView = {
-        let imageview = UIImageView.init();
-        
-        return imageview;
+    lazy var loadingView:LoadingView = {
+        let view = LoadingView()
+        view.frame = CGRect.init(x: (self.view.frame.size.width-50)/2.0, y: -40, width: 50, height: 50);
+        return view;
     }()
 
     override func viewDidLoad() {
@@ -40,8 +39,6 @@ class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDat
         setupView();
         setupAutoLayout();
         setupData();
-        
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,6 +47,8 @@ class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDat
     }
     
     func setupView(){
+        
+        self.tableview.addSubview(self.loadingView);
         self.view.addSubview(self.tableview);
         
     }
@@ -65,6 +64,7 @@ class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let json = JSON(result.value!)
             self.itemArray = json["itemList"].arrayValue
             self.tableview.reloadData();
+            self.stopRefresh();
         };
         
     }
@@ -86,6 +86,35 @@ class HomeSubViewController: UIViewController,UITableViewDelegate,UITableViewDat
             let cell = UITableViewCell.init(style: .default, reuseIdentifier: nil);
             cell.textLabel?.text = "other cell";
             return cell;
+        }
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        if scrollView.contentOffset.y <= 0 {
+            self.loadingView.refreshOffsetY(offsetY: scrollView.contentOffset.y)
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if scrollView.contentOffset.y <= -50 {
+            //去刷新
+            startRefresh();
+            setupData();
+        }
+    }
+    
+    func startRefresh(){
+        self.loadingView.startAnimation();
+        UIView.animate(withDuration: 0.5) {
+            self.tableview.contentInset = UIEdgeInsetsMake(50, 0, 0, 0);
+        }
+    }
+    
+    func stopRefresh(){
+        self.loadingView.stopAnimation();
+        UIView.animate(withDuration: 0.5) {
+            self.tableview.contentInset = .zero;
         }
     }
     

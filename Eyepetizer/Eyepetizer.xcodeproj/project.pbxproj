@@ -29,6 +29,7 @@
 		F3BCDF0B2079AA93002B64CD /* HomeSquartCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF0A2079AA93002B64CD /* HomeSquartCell.swift */; };
 		F3BCDF0D2079C766002B64CD /* HomeSquareFollowCardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF0C2079C766002B64CD /* HomeSquareFollowCardCell.swift */; };
 		F3BCDF0F207B085A002B64CD /* HomeSquareBannerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF0E207B085A002B64CD /* HomeSquareBannerCell.swift */; };
+		F3BCDF12207B3558002B64CD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3BCDF11207B3558002B64CD /* LoadingView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		F3BCDF0A2079AA93002B64CD /* HomeSquartCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSquartCell.swift; sourceTree = "<group>"; };
 		F3BCDF0C2079C766002B64CD /* HomeSquareFollowCardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSquareFollowCardCell.swift; sourceTree = "<group>"; };
 		F3BCDF0E207B085A002B64CD /* HomeSquareBannerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeSquareBannerCell.swift; sourceTree = "<group>"; };
+		F3BCDF11207B3558002B64CD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 		F333B859205BC7E40069BA34 /* Module */ = {
 			isa = PBXGroup;
 			children = (
+				F3BCDF10207B3541002B64CD /* Loading */,
 				F333B884205BC9370069BA34 /* Main */,
 				F333B880205BC9170069BA34 /* Follows */,
 				F333B874205BC9170069BA34 /* Home */,
@@ -350,6 +353,14 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		F3BCDF10207B3541002B64CD /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				F3BCDF11207B3558002B64CD /* LoadingView.swift */,
+			);
+			path = Loading;
+			sourceTree = "<group>";
+		};
 		F5D0E9090C793E151ED8F21B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -521,6 +532,7 @@
 				F333B8B1206129D10069BA34 /* HomeTopView.swift in Sources */,
 				F333B88C205D01D70069BA34 /* RootNagigationController.swift in Sources */,
 				F3BCDF0D2079C766002B64CD /* HomeSquareFollowCardCell.swift in Sources */,
+				F3BCDF12207B3558002B64CD /* LoadingView.swift in Sources */,
 				F3BCDF0B2079AA93002B64CD /* HomeSquartCell.swift in Sources */,
 				F34DD8F32071DDE100638340 /* HomeItemModel.swift in Sources */,
 				F3414527206CCA6E00D0EBDF /* HomeSubViewController.swift in Sources */,
